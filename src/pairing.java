@@ -18,11 +18,12 @@ public class pairing {
             Scanner s = new Scanner(System.in);
             Scanner reader = new Scanner(classNames);
             int totalStudents = 0, b1 = 0, b2 = 0;
+            int blockChoice = 0;
 
             //ask for user input to determine the block used
             System.out.println("\nThis program will randomly match coders and testers from each/both blocks.");
             System.out.println("Please type the respective number for which block(s)'s pairs you'd like to see.\n1) Block 1 \n2) Block 2 \n3) Blocks 1 & 2");
-            int blockChoice = s.nextInt();
+            blockChoice = s.nextInt();
 
             //run loop until it has gone through the entire file
             //add to a variable for block 1/block2
@@ -79,7 +80,7 @@ public class pairing {
                 tempCounter = 0;
                 for (int i = startRead; i < endRead; i++) {
                     if (studentNames[i].charAt(0) == tempChar){
-                        selectionRange[tempCounter] = studentNames[i].substring(2);
+                        selectionRange[tempCounter] = studentNames[i];
                         tempCounter++;
                     }
                     //exit the loop once the block 1/2 names are done
@@ -93,9 +94,10 @@ public class pairing {
                 endRead = b1 + b2;
                 tempChar = '2';
                 tempCounter = 0;
+                selectionRange = new String [endRead - startRead];
                 for (int i = startRead; i < endRead; i++) {
                     if (studentNames[i].charAt(0) == tempChar){
-                        selectionRange[tempCounter] = studentNames[i].substring(2);
+                        selectionRange[tempCounter] = studentNames[i];
                         tempCounter++;
                     }
                     //exit the loop once the block 1/2 names are done
@@ -108,14 +110,14 @@ public class pairing {
                 selectionRange = new String[b1 + b2];
                 tempCounter = 0;
                 do {
-                    selectionRange[tempCounter] = studentNames[tempCounter].substring(2);
+                    selectionRange[tempCounter] = studentNames[tempCounter];
                     tempCounter++;
                 } while (tempCounter < b1 + b2);
             }
 
             String [] coders = new String[selectionRange.length];
             String [] testers = new String[selectionRange.length];
-            //a boolean to tell whether the coder/tester has been taken
+            //a boolean to tell whether the coder/tester has been taken at each place
             boolean [] isTaken = new boolean[selectionRange.length];
 
             //take all the names out of the desired selection (block)
@@ -130,15 +132,16 @@ public class pairing {
                 int testerPlace =  (int) Math.floor(Math.random() * selectionRange.length);
                 if (coders[testerPlace].equals(testers[testerPlace])){
                     //changes the tester array placer at least once, but keeps going until the coder and tester are not equal
-                    do {
+                    while(coders[testerPlace].equals(testers[testerPlace])) {
                         testerPlace =  (int) Math.floor(Math.random() * selectionRange.length);
-                    } while(coders[testerPlace].equals(testers[testerPlace]));
+
+                    }
                 }
-                //if the names are already taken reroll the number
-                else if (isTaken[testerPlace]){
-                    do {
+                //if the names are already taken re-roll the number
+                if (isTaken[testerPlace]){
+                    while(isTaken[testerPlace]){
                         testerPlace =  (int) Math.floor(Math.random() * selectionRange.length);
-                    } while(isTaken[testerPlace]);
+                    }
                 }
 
                 //check whether the coder & tester do not match, then set the bool to true and rerun the loop
@@ -148,6 +151,7 @@ public class pairing {
                 }
             }
 
+            //alphabetical sort method
             for (int i = 0; i < selectionRange.length; i++)
             {
                 for (int j = i + 1; j < selectionRange.length; j++)
@@ -164,10 +168,11 @@ public class pairing {
                 }
             }
 
-            System.out.printf("%-15s %-30s", "Coder", "Tester");
-            System.out.println("\n-----------------------------------------------------------");
+            //format output
+            System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", "First Name", "Last Name", "Block","First Name", "Last Name", "Block");
+            System.out.println("\n---------------------------------------------------------------------------------------------------------");
             for (int i = 0; i < coders.length; i++) {
-                System.out.format("%-30s %-30s", coders[i], testers[i]);
+                System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", coders[i].substring(coders[i].indexOf(",")+1), coders[i].substring(0, coders[i].indexOf(",")), studentNames[i].charAt(0), testers[i].substring(testers[i].indexOf(",")+1), testers[i].substring(0,testers[i].indexOf(",")), studentNames[i].charAt(0));
                 System.out.println();
             }
 
