@@ -16,7 +16,7 @@ public class pairing {
             File classNames = new File("src/classList");
             Scanner s = new Scanner(System.in);
             Scanner reader = new Scanner(classNames);
-            int totalStudents = 0, b1 = 0, b2 = 1;
+            int totalStudents = 0, b1 = 0, b2 = 0;
 
             //ask for user input to determine the block used
             System.out.println("\nThis program will randomly match coders and testers from each/both blocks.");
