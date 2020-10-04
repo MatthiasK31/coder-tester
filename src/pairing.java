@@ -67,7 +67,7 @@ public class pairing {
             }
 
             //determine which area of the file is going to be read
-            String [] selectionRange = { };
+            String [] range = { };
             int startRead = 0, endRead = 0;
             int tempCounter;
             char tempChar = ' ';
@@ -76,11 +76,11 @@ public class pairing {
                 endRead = b1;
                 tempChar = '1';
 
-                selectionRange = new String [endRead - startRead];
+                range = new String [endRead - startRead];
                 tempCounter = 0;
                 for (int i = startRead; i < endRead; i++) {
                     if (studentNames[i].charAt(0) == tempChar){
-                        selectionRange[tempCounter] = studentNames[i];
+                        range[tempCounter] = studentNames[i];
                         tempCounter++;
                     }
                     //exit the loop once the block 1/2 names are done
@@ -94,10 +94,10 @@ public class pairing {
                 endRead = b1 + b2;
                 tempChar = '2';
                 tempCounter = 0;
-                selectionRange = new String [endRead - startRead];
+                range = new String [endRead - startRead];
                 for (int i = startRead; i < endRead; i++) {
                     if (studentNames[i].charAt(0) == tempChar){
-                        selectionRange[tempCounter] = studentNames[i];
+                        range[tempCounter] = studentNames[i];
                         tempCounter++;
                     }
                     //exit the loop once the block 1/2 names are done
@@ -107,54 +107,54 @@ public class pairing {
                 }
             }
             else if (blockChoice == 3) {
-                selectionRange = new String[b1 + b2];
+                range = new String[b1 + b2];
                 tempCounter = 0;
                 do {
-                    selectionRange[tempCounter] = studentNames[tempCounter];
+                    range[tempCounter] = studentNames[tempCounter];
                     tempCounter++;
                 } while (tempCounter < b1 + b2);
             }
 
-            String [] coders = new String[selectionRange.length];
-            String [] testers = new String[selectionRange.length];
+            String [] coders = new String[range.length];
+            String [] testers = new String[range.length];
             //a boolean to tell whether the coder/tester has been taken at each place
-            boolean [] isTaken = new boolean[selectionRange.length];
+            boolean [] isTaken = new boolean[range.length];
 
             //take all the names out of the desired selection (block)
             int increment = 0;
             do{
-                coders[increment] = selectionRange[increment];
+                coders[increment] = range[increment];
                 increment++;
-            } while (increment < selectionRange.length);
+            } while (increment < range.length);
 
 
-            for (int i = 0; i < selectionRange.length; i++) {
-                int testerPlace =  (int) Math.floor(Math.random() * selectionRange.length);
+            for (int i = 0; i < range.length; i++) {
+                int testerPlace =  (int) Math.floor(Math.random() * range.length);
                 if (coders[testerPlace].equals(testers[testerPlace])){
                     //changes the tester array placer at least once, but keeps going until the coder and tester are not equal
                     while(coders[testerPlace].equals(testers[testerPlace])) {
-                        testerPlace =  (int) Math.floor(Math.random() * selectionRange.length);
+                        testerPlace =  (int) Math.floor(Math.random() * range.length);
 
                     }
                 }
                 //if the names are already taken re-roll the number
                 if (isTaken[testerPlace]){
                     while(isTaken[testerPlace]){
-                        testerPlace =  (int) Math.floor(Math.random() * selectionRange.length);
+                        testerPlace =  (int) Math.floor(Math.random() * range.length);
                     }
                 }
 
                 //check whether the coder & tester do not match, then set the bool to true and rerun the loop
                 if (!coders[testerPlace].equals(testers[testerPlace])){
                     isTaken[testerPlace] = true;
-                    testers[i] = selectionRange[testerPlace];
+                    testers[i] = range[testerPlace];
                 }
             }
 
             //alphabetical sort method
-            for (int i = 0; i < selectionRange.length; i++)
+            for (int i = 0; i < range.length; i++)
             {
-                for (int j = i + 1; j < selectionRange.length; j++)
+                for (int j = i + 1; j < range.length; j++)
                 {
                     if (coders[i].compareTo(coders[j]) > 0)
                     {
