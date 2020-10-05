@@ -1,3 +1,11 @@
+/*
+Valmik Revankar
+Coder/Tester lab
+9/18/2020
+Extra: Integrity checking the file (to an extent).
+Other Extra: It also times itself because I'm a Python user.
+*/
+
 // imports
 import java.util.Scanner;
 import java.io.*;
@@ -7,7 +15,7 @@ public class vlamk {
         // Setup
         long startTime = 0; // for timing purposes
         try {
-            String classlist = "src/classList";
+            String classlist = "src/classlist";
             Scanner in = new Scanner(System.in);
             BufferedReader read = new BufferedReader(new FileReader(classlist)); //pass files in as a commandline argument
             int students = 0, block1 = 0, block2 = 0;
@@ -79,6 +87,7 @@ public class vlamk {
                     case 1:
                         runto = block1;
                         block = '1';
+                        break;
                     case 2:
                         startat = block1;
                         runto = block2 + block1;
@@ -88,14 +97,14 @@ public class vlamk {
                 int k = 0;
                 for (int i = 0; i < runto; i++) {
                     if (people[i].charAt(0) == block) {
-                        selectionSet[k] = people[i].substring(2);
+                        selectionSet[k] = people[i];
                         k++;
                     }
                 }
             } else if (blockChoice == 3) {
                 selectionSet = new String[block1 + block2];
                 for (int i = 0; i < block1+block2; i++) {
-                    selectionSet[i] = people[i].substring(2);
+                    selectionSet[i] = people[i];
                 }
             }
 
@@ -137,7 +146,7 @@ public class vlamk {
             if (sortChoice == 1) { // sort by coder
                 for (int i = 0; i < selectionSet.length; i++) {
                     for (int j = i + 1; j < selectionSet.length; j++) {
-                        if (coders[i].compareTo(coders[j]) > 0) {
+                        if (coders[i].substring(coders[i].lastIndexOf(",")).compareTo(coders[j].substring(coders[j].lastIndexOf(","))) > 0) {
                             String temp = coders[i];
                             String temp2 = testers[i];
                             coders[i] = coders[j];
@@ -147,16 +156,18 @@ public class vlamk {
                         }
                     }
                 }
-                System.out.format("%-30s %-30s", "Coder", "Tester");
-                System.out.println("\n-----------------------------------------------------------");
+                System.out.format("%35s %45s", "Tester", "Coder");
+                System.out.println("\n");
+                System.out.format("%-20s %-20s %-20s %-20s %-20s %-20s", "Coder First Name", "Coder Last Name", "Coder Block", "Tester First Name", "Tester Last Name", "Tester Block");
+                System.out.println("\n----------------------------------------------------------------------------------------------------------------------");
                 for (int i = 0; i < coders.length; i++) {
-                    System.out.format("%-30s %-30s", coders[i], testers[i]);
+                    System.out.format("%-20s %-20s %-20s %-20s %-20s %-20s ", coders[i].substring(coders[i].lastIndexOf(",")+1), coders[i].substring(coders[i].indexOf(",")+1, coders[i].lastIndexOf(",")), coders[i].substring(0,coders[i].indexOf(",")), testers[i].substring(testers[i].lastIndexOf(",")+1), testers[i].substring(testers[i].indexOf(",")+1, testers[i].lastIndexOf(",")), testers[i].substring(0,testers[i].indexOf(",")));
                     System.out.println();
                 }
-            } else if (sortChoice == 2) { // sort by tester
+            } else if (sortChoice == 2) { // sort by testers
                 for (int i = 0; i < selectionSet.length; i++) {
                     for (int j = i + 1; j < selectionSet.length; j++) {
-                        if (testers[i].compareTo(testers[j]) > 0) {
+                        if (testers[i].substring(testers[i].lastIndexOf(",")).compareTo(testers[j].substring(testers[j].lastIndexOf(","))) > 0) {
                             String temp = coders[i];
                             String temp2 = testers[i];
                             coders[i] = coders[j];
@@ -166,16 +177,18 @@ public class vlamk {
                         }
                     }
                 }
-                System.out.format("%-30s %-30s", "Tester", "Coder");
-                System.out.println("\n-----------------------------------------------------------");
+                System.out.format("%35s %45s", "Tester", "Coder");
+                System.out.println("\n");
+                System.out.format("%-20s %-20s %-20s %-20s %-20s %-20s", "Tester First Name", "Tester Last Name", "Tester Block", "Coder First Name", "Coder Last Name", "Coder Block");
+                System.out.println("\n----------------------------------------------------------------------------------------------------------------------");
                 for (int i = 0; i < coders.length; i++) {
-                    System.out.format("%-30s %-30s", testers[i], coders[i]);
+                    System.out.format("%-20s %-20s %-20s %-20s %-20s %-20s ", testers[i].substring(testers[i].lastIndexOf(",")+1), testers[i].substring(testers[i].indexOf(",")+1, testers[i].lastIndexOf(",")), testers[i].substring(0,testers[i].indexOf(",")), coders[i].substring(coders[i].lastIndexOf(",")+1), coders[i].substring(coders[i].indexOf(",")+1, coders[i].lastIndexOf(",")), coders[i].substring(0,coders[i].indexOf(",")));
                     System.out.println();
                 }
-            } else if (sortChoice == 3) { // sort by coder, print, sort by tester, and print
+            } else if (sortChoice == 3) {
                 for (int i = 0; i < selectionSet.length; i++) {
                     for (int j = i + 1; j < selectionSet.length; j++) {
-                        if (coders[i].compareTo(coders[j]) > 0) {
+                        if (coders[i].substring(coders[i].lastIndexOf(",")).compareTo(coders[j].substring(coders[j].lastIndexOf(","))) > 0) {
                             String temp = coders[i];
                             String temp2 = testers[i];
                             coders[i] = coders[j];
@@ -185,16 +198,17 @@ public class vlamk {
                         }
                     }
                 }
-                System.out.format("%-30s %-30s", "Coder", "Tester");
-                System.out.println("\n-----------------------------------------------------------");
+                System.out.format("%35s %45s", "Tester", "Coder");
+                System.out.println("\n");
+                System.out.format("%-20s %-20s %-20s %-20s %-20s %-20s", "Coder First Name", "Coder Last Name", "Coder Block", "Tester First Name", "Tester Last Name", "Tester Block");
+                System.out.println("\n----------------------------------------------------------------------------------------------------------------------");
                 for (int i = 0; i < coders.length; i++) {
-                    System.out.format("%-30s %-30s", coders[i], testers[i]);
+                    System.out.format("%-20s %-20s %-20s %-20s %-20s %-20s ", coders[i].substring(coders[i].lastIndexOf(",")+1), coders[i].substring(coders[i].indexOf(",")+1, coders[i].lastIndexOf(",")), coders[i].substring(0,coders[i].indexOf(",")), testers[i].substring(testers[i].lastIndexOf(",")+1), testers[i].substring(testers[i].indexOf(",")+1, testers[i].lastIndexOf(",")), testers[i].substring(0,testers[i].indexOf(",")));
                     System.out.println();
                 }
-                System.out.println("\n\n");
                 for (int i = 0; i < selectionSet.length; i++) {
                     for (int j = i + 1; j < selectionSet.length; j++) {
-                        if (testers[i].compareTo(testers[j]) > 0) {
+                        if (testers[i].substring(testers[i].lastIndexOf(",")).compareTo(testers[j].substring(testers[j].lastIndexOf(","))) > 0) {
                             String temp = coders[i];
                             String temp2 = testers[i];
                             coders[i] = coders[j];
@@ -204,10 +218,13 @@ public class vlamk {
                         }
                     }
                 }
-                System.out.format("%-30s %-30s", "Tester", "Coder");
-                System.out.println("\n-----------------------------------------------------------");
+                System.out.println();
+                System.out.format("%35s %45s", "Tester", "Coder");
+                System.out.println("\n");
+                System.out.format("%-20s %-20s %-20s %-20s %-20s %-20s", "Tester First Name", "Tester Last Name", "Tester Block", "Coder First Name", "Coder Last Name", "Coder Block");
+                System.out.println("\n----------------------------------------------------------------------------------------------------------------------");
                 for (int i = 0; i < coders.length; i++) {
-                    System.out.format("%-30s %-30s", testers[i], coders[i]);
+                    System.out.format("%-20s %-20s %-20s %-20s %-20s %-20s ", testers[i].substring(testers[i].lastIndexOf(",")+1), testers[i].substring(testers[i].indexOf(",")+1, testers[i].lastIndexOf(",")), testers[i].substring(0,testers[i].indexOf(",")), coders[i].substring(coders[i].lastIndexOf(",")+1), coders[i].substring(coders[i].indexOf(",")+1, coders[i].lastIndexOf(",")), coders[i].substring(0,coders[i].indexOf(",")));
                     System.out.println();
                 }
             } else {
