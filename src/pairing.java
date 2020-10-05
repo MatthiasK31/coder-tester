@@ -11,7 +11,6 @@ import java.io.*;
 
 public class pairing {
     public static void main(String[] args) {
-
         try {
             //setup with variables
             File classNames = new File("src/classList");
