@@ -15,9 +15,10 @@ public class pairing {
     public static void main(String[] args) {
         char userChoice = ' ';
         boolean hmm = false;
+        //run the program once initially
         runProgram();
         do {
-            System.out.println("Would you like to run the program again? (y/n)");
+            System.out.println("\nWould you like to run the program again? (y/n)");
             userChoice = s.next().charAt(0);
             if (userChoice == 'y') {
                 System.gc();
@@ -166,8 +167,10 @@ public class pairing {
             } while (increment < range.length);
 
 
+            //checking whether a  name has been matched already
+            int testerPlace;
             for (int i = 0; i < range.length; i++) {
-                int testerPlace = (int) Math.floor(Math.random() * range.length);
+                testerPlace = (int) Math.floor(Math.random() * range.length);
                 if (coders[testerPlace].equals(testers[testerPlace])) {
                     //changes the tester array placer at least once, but keeps going until the coder and tester are not equal
                     while (coders[testerPlace].equals(testers[testerPlace])) {
@@ -190,84 +193,126 @@ public class pairing {
             }
 
             //alphabetical sort method
-            for (int i = 0; i < range.length; i++) {
-                for (int j = i + 1; j < range.length; j++) {
-                    if (coders[i].compareTo(coders[j]) > 0) {
-                        String temp = coders[i];
-                        String temp2 = testers[i];
-                        coders[i] = coders[j];
-                        testers[i] = testers[j];
-                        coders[j] = temp;
-                        testers[j] = temp2;
+
+
+            //format and print output based on the user's choice of sorting
+
+            //sorting by coder
+            if (sortingChoice == 1) {
+                for (int i = 0; i < range.length; i++) {
+                    for (int j = i + 1; j < range.length; j++) {
+                        if (coders[i].compareTo(coders[j]) > 0) {
+                            String temp = coders[i];
+                            String temp2 = testers[i];
+                            coders[i] = coders[j];
+                            testers[i] = testers[j];
+                            coders[j] = temp;
+                            testers[j] = temp2;
+                        }
                     }
+                }
+                System.out.format("%23s %40s", "Coder", "Tester");
+                System.out.println("\n");
+                System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", "First Name", "Last Name", "Block", "First Name", "Last Name", "Block");
+                System.out.println("\n--------------------------------------------------------------------------------");
+                for (int i = 0; i < coders.length; i++) {
+                    int firstCComma = coders[i].indexOf(",") + 1;
+                    int firstTComma = testers[i].indexOf(",") + 1;
+                    int lastCComma = coders[i].lastIndexOf(",");
+                    int lastTComma = testers[i].lastIndexOf(",");
+                    char studentCBlock = coders[i].charAt(0);
+                    char studentTBlock = testers[i].charAt(0);
+                    System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", coders[i].substring(lastCComma + 1), coders[i].substring(firstCComma, lastCComma), studentCBlock, testers[i].substring(lastTComma + 1), testers[i].substring(firstTComma, lastTComma), testers[i].charAt(0));
+                    System.out.println();
+                }
+            }
+            //sorting by tester
+            if (sortingChoice == 2) {
+                for (int i = 0; i < range.length; i++) {
+                    for (int j = i + 1; j < range.length; j++) {
+                        if (testers[i].compareTo(testers[j]) > 0) {
+                            String temp = coders[i];
+                            String temp2 = testers[i];
+                            coders[i] = coders[j];
+                            testers[i] = testers[j];
+                            coders[j] = temp;
+                            testers[j] = temp2;
+                        }
+                    }
+                }
+                System.out.format("%23s %40s", "Tester", "Coder");
+                System.out.println("\n");
+                System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", "First Name", "Last Name", "Block", "First Name", "Last Name", "Block");
+                System.out.println("\n--------------------------------------------------------------------------------");
+                for (int i = 0; i < coders.length; i++) {
+                    int firstCComma = coders[i].indexOf(",") + 1;
+                    int firstTComma = testers[i].indexOf(",") + 1;
+                    int lastCComma = coders[i].lastIndexOf(",");
+                    int lastTComma = testers[i].lastIndexOf(",");
+                    char studentCBlock = coders[i].charAt(0);
+                    char studentTBlock = testers[i].charAt(0);
+                    System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", testers[i].substring(lastTComma + 1), testers[i].substring(firstTComma, lastTComma), testers[i].charAt(0), coders[i].substring(lastCComma + 1), coders[i].substring(firstCComma, lastCComma), coders[i].charAt(0));
+                    System.out.println();
+                }
+            }
+            if (sortingChoice == 3) {
+                for (int i = 0; i < range.length; i++) {
+                    for (int j = i + 1; j < range.length; j++) {
+                        if (coders[i].compareTo(coders[j]) > 0) {
+                            String temp = coders[i];
+                            String temp2 = testers[i];
+                            coders[i] = coders[j];
+                            testers[i] = testers[j];
+                            coders[j] = temp;
+                            testers[j] = temp2;
+                        }
+                    }
+                }
+                System.out.format("%23s %40s", "Coder", "Tester");
+                System.out.println("\n");
+                System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", "First Name", "Last Name", "Block", "First Name", "Last Name", "Block");
+                System.out.println("\n--------------------------------------------------------------------------------");
+                for (int i = 0; i < coders.length; i++) {
+                    int firstCComma = coders[i].indexOf(",") + 1;
+                    int firstTComma = testers[i].indexOf(",") + 1;
+                    int lastCComma = coders[i].lastIndexOf(",");
+                    int lastTComma = testers[i].lastIndexOf(",");
+                    char studentCBlock = coders[i].charAt(0);
+                    char studentTBlock = testers[i].charAt(0);
+                    System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", coders[i].substring(lastCComma + 1), coders[i].substring(firstCComma, lastCComma), studentNames[i].charAt(0), testers[i].substring(lastTComma + 1), testers[i].substring(firstTComma, lastTComma), studentNames[i].charAt(0));
+                    System.out.println();
+                }
+
+                System.out.println("\n");
+
+                for (int i = 0; i < range.length; i++) {
+                    for (int j = i + 1; j < range.length; j++) {
+                        if (testers[i].compareTo(testers[j]) > 0) {
+                            String temp = coders[i];
+                            String temp2 = testers[i];
+                            coders[i] = coders[j];
+                            testers[i] = testers[j];
+                            coders[j] = temp;
+                            testers[j] = temp2;
+                        }
+                    }
+                }
+                System.out.format("%23s %40s", "Tester", "Coder");
+                System.out.println("\n");
+                System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", "First Name", "Last Name", "Block", "First Name", "Last Name", "Block");
+                System.out.println("\n--------------------------------------------------------------------------------");
+                for (int i = 0; i < coders.length; i++) {
+                    int firstCComma = coders[i].indexOf(",") + 1;
+                    int firstTComma = testers[i].indexOf(",") + 1;
+                    int lastCComma = coders[i].lastIndexOf(",");
+                    int lastTComma = testers[i].lastIndexOf(",");
+                    char studentCBlock = coders[i].charAt(0);
+                    char studentTBlock = testers[i].charAt(0);
+                    System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", testers[i].substring(lastTComma + 1), testers[i].substring(firstTComma, lastTComma), testers[i].charAt(0), coders[i].substring(lastCComma + 1), coders[i].substring(firstCComma, lastCComma), coders[i].charAt(0));
+                    System.out.println();
                 }
             }
 
-            //format and print output based on the user's choice of sorting
-            switch (sortingChoice) {
-                case 1:
-                    System.out.format("%23s %40s", "Coder", "Tester");
-                    System.out.println("\n");
-                    System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", "First Name", "Last Name", "Block", "First Name", "Last Name", "Block");
-                    System.out.println("\n--------------------------------------------------------------------------------");
-                    for (int i = 0; i < coders.length; i++) {
-                        int firstCComma = coders[i].indexOf(",") + 1;
-                        int firstTComma = testers[i].indexOf(",") + 1;
-                        int lastCComma = coders[i].lastIndexOf(",");
-                        int lastTComma = testers[i].lastIndexOf(",");
-                        char studentCBlock = coders[i].charAt(0);
-                        char studentTBlock = testers[i].charAt(0);
-                        System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", coders[i].substring(lastCComma + 1), coders[i].substring(firstCComma, lastCComma), studentCBlock, testers[i].substring(lastTComma + 1), testers[i].substring(firstTComma, lastTComma), testers[i].charAt(0));
-                        System.out.println();
-                    }
-                case 2:
-                    System.out.format("%23s %40s", "Tester", "Coder");
-                    System.out.println("\n");
-                    System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", "First Name", "Last Name", "Block", "First Name", "Last Name", "Block");
-                    System.out.println("\n--------------------------------------------------------------------------------");
-                    for (int i = 0; i < coders.length; i++) {
-                        int firstCComma = coders[i].indexOf(",") + 1;
-                        int firstTComma = testers[i].indexOf(",") + 1;
-                        int lastCComma = coders[i].lastIndexOf(",");
-                        int lastTComma = testers[i].lastIndexOf(",");
-                        char studentCBlock = coders[i].charAt(0);
-                        char studentTBlock = testers[i].charAt(0);
-                        System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", testers[i].substring(lastTComma + 1), testers[i].substring(firstTComma, lastTComma), testers[i].charAt(0), coders[i].substring(lastCComma + 1), coders[i].substring(firstCComma, lastCComma), coders[i].charAt(0));
-                        System.out.println();
-                    }
-                case 3:
-                    System.out.format("%23s %40s", "Coder", "Tester");
-                    System.out.println("\n");
-                    System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", "First Name", "Last Name", "Block", "First Name", "Last Name", "Block");
-                    System.out.println("\n--------------------------------------------------------------------------------");
-                    for (int i = 0; i < coders.length; i++) {
-                        int firstCComma = coders[i].indexOf(",") + 1;
-                        int firstTComma = testers[i].indexOf(",") + 1;
-                        int lastCComma = coders[i].lastIndexOf(",");
-                        int lastTComma = testers[i].lastIndexOf(",");
-                        char studentCBlock = coders[i].charAt(0);
-                        char studentTBlock = testers[i].charAt(0);
-                        System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", coders[i].substring(lastCComma + 1), coders[i].substring(firstCComma, lastCComma), studentNames[i].charAt(0), testers[i].substring(lastTComma + 1), testers[i].substring(firstTComma, lastTComma), studentNames[i].charAt(0));
-                        System.out.println();
-                    }
-
-                    System.out.println("\n");
-
-                    System.out.format("%23s %40s", "Tester", "Coder");
-                    System.out.println("\n");
-                    System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", "First Name", "Last Name", "Block", "First Name", "Last Name", "Block");
-                    System.out.println("\n--------------------------------------------------------------------------------");
-                    for (int i = 0; i < coders.length; i++) {
-                        int firstCComma = coders[i].indexOf(",") + 1;
-                        int firstTComma = testers[i].indexOf(",") + 1;
-                        int lastCComma = coders[i].lastIndexOf(",");
-                        int lastTComma = testers[i].lastIndexOf(",");
-                        char studentCBlock = coders[i].charAt(0);
-                        char studentTBlock = testers[i].charAt(0);
-                        System.out.format("%-15s %-15s %-10s %-15s %-15s %-10s", testers[i].substring(lastTComma + 1), testers[i].substring(firstTComma, lastTComma), testers[i].charAt(0), coders[i].substring(lastCComma + 1), coders[i].substring(firstCComma, lastCComma), coders[i].charAt(0));
-                        System.out.println();
-                    }
-            }
         } catch (FileNotFoundException f) {
             System.out.println(f.toString());
         }
