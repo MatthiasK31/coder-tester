@@ -132,28 +132,6 @@ public class pairing {
                 } while (tempCounter < b1 + b2);
             }
 
-            //sort to switch around the first and last names
-            reader = new Scanner(classNames);
-            String[] sortRange = {};
-            switch (blockChoice) {
-                case 1:
-                    sortRange = new String[endRead - startRead];
-                    for (int i = 0; i < endRead; i++) {
-
-                    }
-                case 2:
-                    sortRange = new String[endRead - startRead];
-                    for (int i = 0; i < endRead; i++) {
-
-                    }
-                case 3:
-                    sortRange = new String[b1 + b2];
-                    for (int i = 0; i < b1 + b2; i++) {
-
-                    }
-            }
-
-
             String[] coders = new String[range.length];
             String[] testers = new String[range.length];
             //a boolean to tell whether the coder/tester has been taken at each place
