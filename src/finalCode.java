@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.io.*;
 
-public class pairing {
+public class finalCode {
     public static Scanner s = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -139,10 +139,10 @@ public class pairing {
 
             //take all the coder names out of the desired selection (block)
             int increment = 0;
-            do {
-                coders[increment] = range[increment];
+            for (int i = 0; i < range.length; i++) {
+                coders[increment] = range [increment];
                 increment++;
-            } while (increment < range.length);
+            }
 
 
             //checking whether a  name has been matched already
