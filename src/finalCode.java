@@ -34,7 +34,7 @@ public class finalCode {
     public static void runProgram() {
         try {
             //setup with variables
-            File classNames = new File("src/classList");
+            File classNames = new File("src/names");
             Scanner reader = new Scanner(classNames);
             int totalStudents = 0, b1 = 0, b2 = 0;
             int blockChoice = 0;
