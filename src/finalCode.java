@@ -13,7 +13,7 @@ public class finalCode {
     public static Scanner s = new Scanner(System.in);
 
     public static void main(String[] args) {
-        char userChoice = ' ';
+        char userChoice;
         boolean hmm = false;
         //run the program once initially
         runProgram();
@@ -34,7 +34,7 @@ public class finalCode {
     public static void runProgram() {
         try {
             //setup with variables
-            File classNames = new File("src/names");
+            File classNames = new File("src/classList");
             Scanner reader = new Scanner(classNames);
             int totalStudents = 0, b1 = 0, b2 = 0;
             int blockChoice = 0;
